@@ -1,3 +1,6 @@
+import re
+
+
 def main():
     
     try:
@@ -6,7 +9,7 @@ def main():
                 return(string)
             new_string=""
             alphabet=("abEFefghABCDmnopq&*()tuvwxy_+{}rszGHIJKLM"+
-                      "RSTU3NOPQ45678VWXY90~!@#$%|Zi `12:<c>?[jkld]\;,./'""^")
+                      "RSTU3NOPQ45678VWXY90~!@#$%|Zi `12:<c>?[jkld];,\/.'""^")
             for chop in range(0,len(string),degree):
                 for letter in string[chop:chop+degree-1]:
                     for i in range(len(alphabet)):
@@ -30,9 +33,12 @@ def main():
                 provided_file=open(input("Enter the name of file you want encrypted>>>   ")+".txt","r")
                 print("")
                 message=(provided_file.read())
+                
+                message=message.replace('\n', ' ').replace('\r', ' ')
+                message= re.sub('[^0-9a-zA-Z]+', 'rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee', message)
                 provided_file.close()
                 encryption_level=int(input("Enter encryption key>>>   "))
-                while encryption_level>919:
+                while encryption_level>91:
                     print("")
                     encryption_level=int(input("Encryption level too high enter lower value>>>   "))
                 print("")
@@ -46,7 +52,7 @@ def main():
 
             if file_read!="True":
                 encryption_level=int(input("Enter encryption key>>>   "))
-                while encryption_level>919:
+                while encryption_level>91:
                     print("")
                     encryption_level=int(input("Encryption level too high enter lower value>>>   "))
                 print("")
@@ -55,7 +61,10 @@ def main():
                     print("")
                     encryption_degree=int(input("Encryption degree to low>>>   "))
                 print("")
+                message=message.replace('\n', ' ').replace('\r', ' ')
+                message= re.sub('[^0-9a-zA-Z]+', 'rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee', message)
                 encrypted_message=encrypt(message,encryption_level,encryption_degree)
+                
             print("Encrypted message is as follows>>>  ",encrypted_message)
             print("")
             save=input("Would you like to save your encrypted message?(Y/N)>>>")
@@ -79,8 +88,10 @@ def main():
                 encryption_level=int(encrypted_file.readline())
                 encryption_degree=int(encrypted_file.readline())
                 message=(encrypted_file.readline())
+                
                 encrypted_file.close()
-                decrypted_message=encrypt(message,920-encryption_level,encryption_degree)
+                decrypted_message=encrypt(message,92-encryption_level,encryption_degree)
+                decrypted_message = decrypted_message.replace("rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee", " ")
                 print("Decrypted message is as follows>>>  ",decrypted_message)
                 print("")
                 save=input("Would you like to save your decrypted message?(Y/N)>>>")
@@ -95,7 +106,7 @@ def main():
                 file_read="True"
             if file_read!="True":        
                 encryption_level=int(input("Enter encryption key>>>   "))
-                while encryption_level>919:
+                while encryption_level>91:
                     print("")
                     encryption_level=int(input("Encryption level too high enter lower value>>>   "))
                 print("")
@@ -104,7 +115,8 @@ def main():
                     print("")
                     encryption_degree=int(input("Encryption degree to low>>>   "))
                 print("")
-                decrypted_message=encrypt(message,920-encryption_level,encryption_degree)
+                decrypted_message=encrypt(message,92-encryption_level,encryption_degree)
+                decrypted_message = decrypted_message.replace("rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee", " ")
                 print("Decrypted message is as follows>>>  ",decrypted_message)
                 print("")
                 save=input("Would you like to save your decrypted message?(Y/N)>>>")
@@ -133,8 +145,5 @@ while run!="exit":
     main()
 
     
-
-
-        
-        
+    
 
