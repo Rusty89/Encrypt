@@ -1,5 +1,5 @@
 import re
-
+import random
 
 def main():
     
@@ -19,7 +19,7 @@ def main():
             if level>0:
                 return(encrypt(new_string,level-1,degree))
             
-
+        salt=["asdcd","dfds","retscg","dfsa","treyrtg","aFcgE", "Tscghe","asdD","32cg","234cgeDwe","dscg2346","1325","3261"]
         save=""
         file_read=""
         encrypt_decrypt=(input("Type Decrypt(D) or Encrypt(E) to begin, type Exit to leave>>>   ")).capitalize()
@@ -35,7 +35,17 @@ def main():
                 message=(provided_file.read())
                 
                 message=message.replace('\n', ' ').replace('\r', ' ')
-                message= re.sub('[^0-9a-zA-Z]+', 'rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee', message)
+                message= re.sub('[^0-9a-zA-Z]+', ' ', message)
+                #add salt
+                
+                while(" " in message):
+                        for i in range(len(message)):
+                                
+                                if (message[i]==" "):                                        
+                                        indice=random.randint(0,len(salt)-1)
+                                        message = message[:i]+salt[indice]+message[i+1:]
+                                        
+                
                 provided_file.close()
                 encryption_level=int(input("Enter encryption key>>>   "))
                 while encryption_level>91:
@@ -62,7 +72,18 @@ def main():
                     encryption_degree=int(input("Encryption degree to low>>>   "))
                 print("")
                 message=message.replace('\n', ' ').replace('\r', ' ')
-                message= re.sub('[^0-9a-zA-Z]+', 'rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee', message)
+                message= re.sub('[^0-9a-zA-Z]+', ' ', message)
+                
+                #add salt
+                
+                while(" " in message):
+                        for i in range(len(message)):
+                                
+                                if (message[i]==" "):                                        
+                                        indice=random.randint(0,len(salt)-1)
+                                        message = message[:i]+salt[indice]+message[i+1:]
+                                        
+                                
                 encrypted_message=encrypt(message,encryption_level,encryption_degree)
                 
             print("Encrypted message is as follows>>>  ",encrypted_message)
@@ -91,7 +112,11 @@ def main():
                 
                 encrypted_file.close()
                 decrypted_message=encrypt(message,92-encryption_level,encryption_degree)
-                decrypted_message = decrypted_message.replace("rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee", " ")
+
+                #remove salt
+                for i in salt:
+                        
+                        decrypted_message = decrypted_message.replace(i, " ")
                 print("Decrypted message is as follows>>>  ",decrypted_message)
                 print("")
                 save=input("Would you like to save your decrypted message?(Y/N)>>>")
@@ -116,7 +141,10 @@ def main():
                     encryption_degree=int(input("Encryption degree to low>>>   "))
                 print("")
                 decrypted_message=encrypt(message,92-encryption_level,encryption_degree)
-                decrypted_message = decrypted_message.replace("rrrrrrrrrrrrrsssssssssssstttttttttttttlllllllllllnnnnnnnnnnnnneeeeeeeeeeeeeeee", " ")
+                
+                for i in salt:
+                        
+                        decrypted_message = decrypted_message.replace(i, " ")
                 print("Decrypted message is as follows>>>  ",decrypted_message)
                 print("")
                 save=input("Would you like to save your decrypted message?(Y/N)>>>")
@@ -143,7 +171,3 @@ def main():
 run="run"        
 while run!="exit":
     main()
-
-    
-    
-
