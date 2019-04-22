@@ -117,8 +117,11 @@ def main():
                 encrypted_file=open(input("Enter the name of the encrypted file>>>   ")+".txt","r")
                 print("")
                 encryption_level=int(encrypted_file.readline())
+
                 encryption_degree=int(encrypted_file.readline())
+
                 message=(encrypted_file.readline())
+      
                 
                 encrypted_file.close()
                 decrypted_message=encrypt(message,92-encryption_level,encryption_degree)
@@ -126,12 +129,10 @@ def main():
                 
                 decrypted_message=decrypted_message.replace('peRioD', '.')
                 decrypted_message=decrypted_message.replace('qUotE', '"')
-                decrypted_message=message.replace('cOMmA',',')
-                
+                decrypted_message=decrypted_message.replace('cOMmA',',')
                 decrypted_message=decrypted_message.replace("queStIoNMarK",'?')
                 #remove salt
-                for i in salt:
-                        
+                for i in salt:                        
                         decrypted_message = decrypted_message.replace(i, " ")
                 print("Decrypted message is as follows>>>  ",decrypted_message)
                 print("")
