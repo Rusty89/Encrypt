@@ -33,7 +33,11 @@ def main():
                 provided_file=open(input("Enter the name of file you want encrypted>>>   ")+".txt","r")
                 print("")
                 message=(provided_file.read())
-                
+
+                message=message.replace('.', 'peRioD')
+                message=message.replace('"', 'qUotE')
+                message=message.replace(',', 'cOMmA')
+                message=message.replace('?', 'queStIoNMarK')
                 message=message.replace('\n', ' ').replace('\r', ' ')
                 message= re.sub('[^0-9a-zA-Z]+', ' ', message)
                 #add salt
@@ -71,6 +75,12 @@ def main():
                     print("")
                     encryption_degree=int(input("Encryption degree to low>>>   "))
                 print("")
+
+                ### replace periods, commas and quotes, remove newlines, get rid of any remaining non alphanumerics.
+                message=message.replace('.', 'peRioD')
+                message=message.replace('"', 'qUotE')
+                message=message.replace(',', 'cOMmA')
+                message=message.replace('?', 'queStIoNMarK')
                 message=message.replace('\n', ' ').replace('\r', ' ')
                 message= re.sub('[^0-9a-zA-Z]+', ' ', message)
                 
@@ -112,7 +122,13 @@ def main():
                 
                 encrypted_file.close()
                 decrypted_message=encrypt(message,92-encryption_level,encryption_degree)
-
+                ### replace periods and quotes
+                
+                decrypted_message=decrypted_message.replace('peRioD', '.')
+                decrypted_message=decrypted_message.replace('qUotE', '"')
+                decrypted_message=message.replace('cOMmA',',')
+                
+                decrypted_message=decrypted_message.replace("queStIoNMarK",'?')
                 #remove salt
                 for i in salt:
                         
@@ -141,7 +157,13 @@ def main():
                     encryption_degree=int(input("Encryption degree to low>>>   "))
                 print("")
                 decrypted_message=encrypt(message,92-encryption_level,encryption_degree)
+                ### replace periods and quotes
+                decrypted_message=decrypted_message.replace('peRioD', '.')
+                decrypted_message=decrypted_message.replace('qUotE', '"')
+                decrypted_message=decrypted_message.replace('cOMmA',',')
                 
+                decrypted_message=decrypted_message.replace('queStIoNMarK','?')
+                ##remove gibberish
                 for i in salt:
                         
                         decrypted_message = decrypted_message.replace(i, " ")
