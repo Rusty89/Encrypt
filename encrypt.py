@@ -19,7 +19,7 @@ def main():
             if level>0:
                 return(encrypt(new_string,level-1,degree))
             
-        salt=["asdcd","dfds","retscg","dfsa","treyrtg","aFcgE", "Tscghe","asdD","32cg","234cgeDwe","dscg2346","1325","3261"]
+        salt=["afunzd","andzs","rtheg","dfsa","treyrtg","aFcgE", "Tscghe","apotoatoD","32cg","234cgeDwe","dscg2346","1325", "elephafant"]
         save=""
         file_read=""
         encrypt_decrypt=(input("Type Decrypt(D) or Encrypt(E) to begin, type Exit to leave>>>   ")).capitalize()
@@ -93,7 +93,7 @@ def main():
                                         indice=random.randint(0,len(salt)-1)
                                         message = message[:i]+salt[indice]+message[i+1:]
                                         
-                                
+                print(message)            
                 encrypted_message=encrypt(message,encryption_level,encryption_degree)
                 
             print("Encrypted message is as follows>>>  ",encrypted_message)
